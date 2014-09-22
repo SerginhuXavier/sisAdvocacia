@@ -1,0 +1,133 @@
+/* 
+    Document   : estilo
+    Created on : 21/07/2009, 17:11:21
+    Author     : Thiago
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.body {
+
+   background-image: url(../img/fundo_tela.gif);
+
+
+
+}
+
+.table_titulo{
+
+ width:100%;
+
+
+
+}
+
+
+
+table th {
+
+    background-image: url(../img/fundo_table.gif);
+    font-weight:bold;
+    font-size: 11pt;
+    text-align:center;
+    font-family: verdana;
+    color:maroon;
+
+
+
+}
+
+table td {
+
+      font-family: verdana;
+    font-size:10pt;
+    color:maroon;
+    background-color:white;
+
+
+
+
+}
+.texto {
+
+    font-family: verdana;
+    font-size:10pt;
+    color:maroon;
+    background-color:white;
+
+}
+
+.titulo {
+
+    font-family: verdana;
+    font-size:10pt;
+    color:maroon;
+    background-color:white;
+    font-weight:bold;
+
+}
+
+
+input,select,textarea {
+
+    border: 1px solid maroon ;
+    font-family: verdana;
+    font-size:11pt;
+    color:maroon;
+    background-color:white;
+
+}
+
+a:link {
+
+    font-family: verdana;
+    font-size:10pt;
+    text-decoration:none;
+    color:maroon;
+
+}
+
+a:hover {
+
+    font-family: verdana;
+    font-size:10pt;
+    text-decoration:underline;
+    color:maroon;
+
+}
+
+a:visited {
+
+    font-family: verdana;
+    font-size:10pt;
+    color:maroon;
+   text-decoration:none;
+
+}
+
+a {
+
+   font-family: verdana;
+    font-size:10pt;
+    text-decoration:underline;
+    color:white;
+
+}
+
+#processo {
+
+    width:400px;
+    height:200px;
+    border:1px solid maroon;
+
+
+}
+span {
+
+    background-color:maroon;
+    color:white;
+}
