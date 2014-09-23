@@ -3,10 +3,10 @@ require_once "constantes.php";
 
 class Banco{
 
-	public $host = "localhost";
-	public $user = "root";
-	public $pass = "mysql";
-	public $base = "advocacia";
+	private $host = CON_ADVOCACIA_HOST;
+    private $user = CON_ADVOCACIA_USER;
+    private $pass = CON_ADVOCACIA_PASS;
+	private $base = CON_ADVOCACIA_BASE;
 	public $Conn;
 	
 	public function abreConexao(){
@@ -19,7 +19,7 @@ class Banco{
 	}
 
 	/**
-	 * Estas funções abaixo, serão para lidarmos com as consultas utilizadas com Mysqli
+	 * Estas funï¿½ï¿½es abaixo, serï¿½o para lidarmos com as consultas utilizadas com Mysqli
 	 */
 	public function abreConexaoi(){
 		$this->Conni = mysqli_connect($this->host,$this->user,$this->pass);

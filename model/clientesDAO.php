@@ -1,13 +1,10 @@
 <?php
-include_once "banco.php";
-include_once "clientes.php";
 include_once "constantes.php";
+include_once "banco.php";
+include_once "bean/clientes.php";
 
 class clientesDAO extends banco {
-
-
     public function incluirCliente($objClientes){
-
         $this->abreConexao();
 
         $sql = 'INSERT INTO '.TBL_CLIENTES.'
@@ -23,27 +20,21 @@ class clientesDAO extends banco {
                     estado_civil = "'.$objClientes->getEstadoCivil().'",
                     profissao = "'.$objClientes->getProfissao().'",
                     email = "'.$objClientes->getEmail().'",
-                    observacao = "'.$objClientes->getObservacoes().'"';
+                    observacao = "'.$objClientes->getObservacoes().'",
+                    nacionalidade = "'.$objClientes->getNacionalidade().'",
+                    datacadastro = NOW()';
 
-       mysql_query($sql) or die ('Não foi possível cadastrar o cliente. '.mysql_error());
-
-       echo "<script>alert('Cadastro Realizado com Sucesso.');</script>";
-        echo "<script>window.location='../view/listaCliente.php';</script>";
+        mysql_query($sql);
 
        $this->fechaConexao();
-
-
-
     }
 
     public function listar() {
-
-
         $this->abreConexao();
 
         $sql = 'SELECT * FROM '.TBL_CLIENTES.' ORDER BY nome ASC';
 
-        $resultado = mysql_query($sql) or die ('Não foi possível listar. '.mysql_error());
+        $resultado = mysql_query($sql);
 
         while ($linha = mysql_fetch_assoc($resultado)){
 
@@ -58,12 +49,9 @@ class clientesDAO extends banco {
         }
 
         $this->fechaConexao();
-
-
     }
 
     public function consultar($objClientes){
-
         $this->abreConexao();
 
         $sql = 'SELECT *
@@ -72,24 +60,19 @@ class clientesDAO extends banco {
                 WHERE
                       idCliente = "'.$objClientes->getIdCliente().'"';
 
-        $resultado = mysql_query($sql) or die ('Não foi possível consultar esse cliente');
+        $resultado = mysql_query($sql);
 
         $linha = mysql_fetch_assoc($resultado);
 
         return $linha;
 
         $this->fechaConexao();
-
-
-
-
     }
 
     public function alterarCliente($objClientes){
-
         $this->abreConexao();
 
-        $sql  = 'UPDATE '.TBL_CLIENTES.'
+       echo $sql  = 'UPDATE '.TBL_CLIENTES.'
                     SET
                         nome = "'.$objClientes->getNome().'",
                         endereco = "'.$objClientes->getEndereco().'",
@@ -102,71 +85,56 @@ class clientesDAO extends banco {
                         estado_civil = "'.$objClientes->getEstadoCivil().'",
                         profissao = "'.$objClientes->getProfissao().'",
                         email = "'.$objClientes->getEmail().'",
-                        observacao = "'.$objClientes->getObservacoes().'"
+                        observacao = "'.$objClientes->getObservacoes().'",
+                        nacionalidade = "'.$objClientes->getNacionalidade().'"
                   WHERE
-                        idCliente = "'.$objClientes->getIdCliente().'"';
+                        idCliente = '.$objClientes->getIdCliente();
 
-        mysql_query($sql) or die ('Não foi possível atualizar esse cliente'.mysql_error());
-
-     
+        mysql_query($sql);
 
         $this->fechaConexao();
-
-
-
-
-
     }
 
     public function excluirCliente($objClientes){
-
-
         $this->abreConexao();
 
         $sql = 'DELETE FROM '.TBL_CLIENTES.' WHERE idCliente = "'.$objClientes->getIdCliente().'"';
 
-        mysql_query($sql) or die ('Não foi possível excluir o cliente. '.mysql_error());
+        mysql_query($sql);
 
         $this->fechaConexao();
-
-
     }
 
-    public function listaClienteProcesso(){
-
+    public function listaClienteProcesso($idCliente){
         $this->abreConexao();
-        $cliente=$_GET['id'];
-        $sql = 'SELECT *
-                         from '.TBL_PROCESSOS.'
-                                               where idCliente='.$cliente.' and status=1';
+        $sql = 'SELECT tp.*, tc.nome
+                     FROM '.TBL_PROCESSOS.' tp
+                     JOIN '.TBL_CLIENTES.' tc ON
+                        tp.idCliente = tc.idCliente
+                    WHERE tp.idCliente='.$idCliente.' and tp.status=1';
 
-        $resultado = mysql_query($sql) or die ('Não foi possível fazer a listagem de todos os clientes. '.mysql_error());
-        
-        $buscaCliente=" SELECT nome from".TBL_CLIENTES." where idCliente=".$cliente;
-                $resultado2=mysql_query($buscaCliente);
-                $linha2=mysql_fetch_array($resultado2);
-        while($linha = mysql_fetch_array($resultado)){
-                
-            echo '
+
+        $resultado = mysql_query($sql);
+        $numLinhas = mysql_num_rows($resultado);
+        $retorno = '';
+
+        if($numLinhas>0){
+            while($linha = mysql_fetch_array($resultado)){
+                $retorno .= '
                 <tr align="center">
                     <td>'.$linha['nprocesso'].'</td>
-                    <td>'.$linha2['nome'].'</td>
+                    <td>'.$linha['nome'].'</td>
                     <td>'.$linha['valorAcao'].'</td>
                 </tr>
-                </table>';
-
-
+                ';
+            }
+        }else{
+            $retorno = 0;
         }
 
+        return $retorno;
     }
-
-
-
-
-
-
 }
 
 $objclientesDAO = new clientesDAO();
-
 ?>

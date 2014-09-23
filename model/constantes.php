@@ -3,7 +3,7 @@
 
 define('CON_ADVOCACIA_HOST','localhost');
 define("CON_ADVOCACIA_USER","root");
-define("CON_ADVOCACIA_PASS","mysql");
+define("CON_ADVOCACIA_PASS","");
 define("CON_ADVOCACIA_BASE","advocacia");
 
 //Constantes de banco
@@ -23,10 +23,10 @@ define("TBL_USUARIOS",DB_ADVOCACIA.TBL_ADVOCACIA."usuario ");
 define("TBL_VARAS",DB_ADVOCACIA.TBL_ADVOCACIA."vara");
 
 
-//Constante da Paginação das listas com 5 por página
+//Constante da Paginaï¿½ï¿½o das listas com 5 por pï¿½gina
 define("LISTA","5");
 
-//Constantes Relatórios PDF
+//Constantes Relatï¿½rios PDF
 define("PAGINACAO_RELATORIO","48");
 define("FONTE","Arial");
 define("FONTE_FILTRO","10");

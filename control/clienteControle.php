@@ -5,7 +5,7 @@ include '../model/clientesDAO.php';
 $opcao = $_POST['opcao'];
 
 
-switch($opcao) {
+switch ($opcao) {
 
     case "incluir":
 
@@ -20,8 +20,13 @@ switch($opcao) {
         $objClientes->setCelular($_POST['celular']);
         $objClientes->setObservacoes($_POST['observacoes']);
         $objClientes->setEmail($_POST['email']);
+        $objClientes->setNacionalidade($_POST['nacionalidade']);
+        $objClientes->setProfissao($_POST['profissao']);
 
         $objclientesDAO->incluirCliente($objClientes);
+
+        echo "<script>alert('Cadastro Realizado com Sucesso.');</script>";
+        echo "<script>window.location='../view/consultarCliente.php';</script>";
 
     break;
 
@@ -39,23 +44,20 @@ switch($opcao) {
         $objClientes->setCelular($_POST['celular']);
         $objClientes->setObservacoes($_POST['observacoes']);
         $objClientes->setEmail($_POST['email']);
+        $objClientes->setNacionalidade($_POST['nacionalidade']);
+        $objClientes->setProfissao($_POST['profissao']);
 
-        $objclientesDAO->alterarCliente($objClientes);
+        echo $objclientesDAO->alterarCliente($objClientes);
 
-        
-        echo "<script>window.location = '../view/listaCliente.php';</script>";
-        break;
+        //echo "<script>alert('Cadastro Realizado com Sucesso.');</script>";
+        //echo "<script>window.location = '../view/consultarCliente.php';</script>";
+    break;
 
-        case "excluir":
+    case "excluir":
 
-            $objClientes->setIdCliente($_POST['id']);
+        $objClientes->setIdCliente($_POST['id']);
 
-            $objclientesDAO->excluirCliente($objClientes);
-
-
-
+        $objclientesDAO->excluirCliente($objClientes);
+    break;
 }
-
-
-
 ?>

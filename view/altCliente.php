@@ -1,21 +1,14 @@
 <link rel="styleSheet" type="text/css" href="../public/css/estilo.css">
 <script type="text/javascript" src="../public/js/jquery.js"></script>
-<script type="text/javascript" src="../public/js/altCliente.js"></script>
+<script type="text/javascript" src="../public/js/cliente.js"></script>
 <script type="text/javascript" src="../public/js/jquery.maskedinput-1.2.2.js"></script>
-<script>
-$().ready(function() {
-		$('input[@name=tel1]').mask('9999-9999');
-		$('input[@name=tel2]').mask('9999-9999');
-		$('input[@name=cel]').mask('9999-9999');
-		$('input[@name=cpf]').mask('999.999.999-99');
-	})
-</script>
+
 <?php
 
 include '../model/clientesDAO.php';
 
- $objClientes->setIdCliente($_GET['id']);
- $id=$_GET['id'];
+ $objClientes->setIdCliente($_GET['idCliente']);
+ $id=$_GET['idCliente'];
 
 $resultado = $objclientesDAO->consultar($objClientes);
 
@@ -24,12 +17,12 @@ $resultado = $objclientesDAO->consultar($objClientes);
 
 ?>
 
-<form name="frmCliente" action="../control/controleCliente.php" id="frmCliente" method="POST">
+<form name="frmCliente" action="../control/clienteControle.php" id="frmCliente" method="POST">
 
 <table border="0" cellspacing="0" align="center">
     <thead>
         <tr>
-            <th colspan="2">Alteração de Clientes</th>
+            <th colspan="2">AlteraÃ§Ã£oo de Clientes</th>
             
         </tr>
     </thead>
@@ -39,7 +32,7 @@ $resultado = $objclientesDAO->consultar($objClientes);
             <td><input type="text" name="nome"  size="30" id="nome" value="<?php echo $resultado['nome']; ?>" /><br><span id="erroNome"></span></td>
         </tr>
         <tr>
-            <td>*Endereço:</td>
+            <td>*EndereÃ§o:</td>
             <td><input type="text" name="endereco" value="<?php echo $resultado['endereco']; ?>" size="30" id="endereco" /><br><span id="erroEndereco"></span></td>
         </tr>
         <tr>
@@ -104,7 +97,7 @@ $resultado = $objclientesDAO->consultar($objClientes);
 		<td><input type="text" name="nacionalidade" value="<?php echo $resultado['nacionalidade']; ?>" maxlength="30" size="33" id="nacionalidade"></td>
 		</tr>
         <tr>
-            <td>Profissão:</td>
+            <td>ProfissÃ£o:</td>
             <td><input type="text" name="profissao"  value="<?php echo $resultado['profissao']; ?>" size="30" id="profissao" /><br><span id="erroProfissao"></span></td>
         </tr>
         <tr>
@@ -112,14 +105,14 @@ $resultado = $objclientesDAO->consultar($objClientes);
             <td><input type="text" name="email"  value="<?php echo $resultado['email']; ?>" size="30" id="email" /><br><span id="erroEmail"></span></td>
         </tr>
          <tr>
-            <td>Observações:</td>
+            <td>ObservaÃ§Ãµes:</td>
             <td><textarea id="observacoes" name="observacoes" cols="28" rows="3" class="campo"><?php echo $resultado['observacao']; ?></textarea></td>
         </tr>
         <tr>
             <td align="center" colspan="2">
                 <input type="hidden" name="opcao" value="alterar" id="opcao" />
                 <input type="hidden" name="id" value="<?php echo $id;?>" id="id" />
-                <input type="submit" value="Alterar" name="alterar" id="alterar"  />
+                <input type="button" value="Alterar" name="alterar" id="alterar"  />
                 <input type="reset" value="Limpar" name="limpar" id="limpar"  />
             </td>
            
