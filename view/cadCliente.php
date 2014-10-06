@@ -3,7 +3,7 @@
 <script type="text/javascript" src="../public/js/cliente.js"></script>
 <script type="text/javascript" src="../public/js/jquery.maskedinput-1.2.2.js"></script>
 
-<form name="frmCliente" action="../control/clienteControle.php" id="frmCliente" method="POST">
+<form name="frmCliente" action="../control/controleCliente.php" id="frmCliente" method="POST">
 
     <table border="0" cellspacing="0" align="center">
         <thead>

@@ -7,7 +7,7 @@ function excluirCliente(id){
     if (confirma == true){
 
         Ext.Ajax.request({
-            url: ("../control/clienteControle.php"),
+            url: ("../control/controleCliente.php"),
             params: { id: id,
                 opcao: "excluir"},
             success: function() {
@@ -28,8 +28,8 @@ function excluirCliente(id){
 }
 
 $(document).ready(function(){
-    $('#telefone').mask('(99)9999-9999');
-    $('#telefone2').mask('(99)9999-9999');
+    $('#telefone').mask('(99)99999-9999');
+    $('#telefone2').mask('(99)99999-9999');
     $('#celular').mask('(99)99999-9999');
     $('#cpf').mask('999.999.999-99');
 

@@ -17,7 +17,7 @@ $resultado = $objclientesDAO->consultar($objClientes);
 
 ?>
 
-<form name="frmCliente" action="../control/clienteControle.php" id="frmCliente" method="POST">
+<form name="frmCliente" action="../control/controleCliente.php" id="frmCliente" method="POST">
 
 <table border="0" cellspacing="0" align="center">
     <thead>

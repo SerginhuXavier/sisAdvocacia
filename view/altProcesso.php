@@ -1,13 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset = ISO-8859-1" />
 <link rel="styleSheet" type="text/css" href="../public/css/estilo.css">
 <script type="text/javascript" src="../public/js/jquery.js"></script>
-<script type="text/javascript" src="../public/js/cadProcesso.js"></script>
+<script type="text/javascript" src="../public/js/processo.js"></script>
 <script type="text/javascript" src="../public/js/jquery.maskedinput-1.2.2.js"></script>
-<script>
-$(document).ready(function() {
-		$('input[@id=data]').mask('99/99/9999');
-	})
-</script>
+
 <?php
 include_once '../model/processoDAO.php';
 include_once '../model/clientesDAO.php';
@@ -22,13 +18,13 @@ $linha=$objProcessoDAO->consultarProcesso($objProcesso);
 <table border="0" cellspacing="0" align="center">
     <thead>
         <tr>
-            <th colspan="2">Alteração de Processos</th>
+            <th colspan="2">Alteraï¿½ï¿½o de Processos</th>
             
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Número do Processo:</td>
+            <td>Nï¿½mero do Processo:</td>
             <td><input type="text" name="nProcesso" value="<?php echo $linha['nprocesso']; ?>" size="20" id="nProcesso" /><br><span id="erroProcesso"></span></td>
         </tr>
         <tr>
@@ -46,7 +42,7 @@ $linha=$objProcessoDAO->consultarProcesso($objProcesso);
             
         </tr>
         <tr>
-            <td>Parte Contrária:</td>
+            <td>Parte Contrï¿½ria:</td>
             <td><input type="text" name="parteContraria" value="<?php echo $linha['parte_contraria']; ?>" size="20" id="parteContraria" /><br><span id="erroParteContraria"></span></td>
         </tr>
         <tr>
@@ -65,7 +61,7 @@ $linha=$objProcessoDAO->consultarProcesso($objProcesso);
         <tr>
             <td>Forma de Pagamento:</td>
             <td><select name="formaPagamento" size="1" id="formaPagamento">
-                    <option value="vista">À VISTA</option>
+                    <option value="vista">ï¿½ VISTA</option>
                     <option value="parcelado">PARCELADO</option>
                 </select><span id="erroFormaPagamento"></span></td>
         </tr>
@@ -76,13 +72,13 @@ $linha=$objProcessoDAO->consultarProcesso($objProcesso);
        
         <tr id="nParcela">
 
-            <td>Número de Parcelas:</td>
+            <td>Nï¿½mero de Parcelas:</td>
             <td><input type="text" name="nParcelas" value="<?php echo $linha['nParcelas']; ?>" size="20" id="nParcelas" /><span id="erroNParcelas"></span></td>
             
         </tr>
 
         <tr>
-            <td>% Valor Ação:</td>
+            <td>% Valor Aï¿½ï¿½o:</td>
             <td><input type="text" name="valorAcao" value="<?php echo $linha['valorAcao']; ?>" size="20" id="valorAcao" /><span id="errovalorAcao"></span></td>
         </tr>
         <tr>

@@ -137,12 +137,11 @@ class processoDAO extends banco {
 		$this->fechaConexao();
 		}
 
-       public function listaAndamentoProcesso(){
+       public function listaAndamentoProcesso($idProcesso){
            $this->abreConexao();
-                $processo=$_GET['id'];
-                $sql="SELECT *
+                echo $sql="SELECT *
                                 from ".TBL_ANDAMENTOS."
-                                                        where idProcesso=".$processo;
+                                                        where idProcesso=".$idProcesso;
                 $resultado=mysql_query($sql);
 
                 while($linha=mysql_fetch_array($resultado)){

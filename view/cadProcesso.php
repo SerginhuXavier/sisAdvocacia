@@ -1,13 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset = ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset = utf8" />
 <link rel="styleSheet" type="text/css" href="../public/css/estilo.css">
 <script type="text/javascript" src="../public/js/jquery.js"></script>
-<script type="text/javascript" src="../public/js/cadProcesso.js"></script>
 <script type="text/javascript" src="../public/js/jquery.maskedinput-1.2.2.js"></script>
-<script>
-$(document).ready(function() {
-		$('input[@name=data]').mask('99/99/9999');
-	})
-</script>
+<script type="text/javascript" src="../public/js/processo.js"></script>
+
 <?php
 
 include_once '../model/clientesDAO.php';
@@ -26,7 +22,7 @@ include_once '../model/tribunalDAO.php';
     </thead>
     <tbody>
         <tr>
-            <td>Número do Processo:</td>
+            <td>NÃºmero do Processo:</td>
             <td><input type="text" name="nProcesso" value="" size="20" id="nProcesso" /><br><span id="erroProcesso"></span></td>
         </tr>
         <tr>
@@ -34,7 +30,7 @@ include_once '../model/tribunalDAO.php';
             <td><select name="idCliente" size="1" id="idCliente">
                     <option value="" selected>Escolha um cliente..</option>
                     <?php
-                            $objclientesDAO->listaClienteProcesso();
+                            $objclientesDAO->listaClienteProcessoCombo();
                      ?>
 
                 </select><span id="erroCliente"></span></td>
@@ -44,7 +40,7 @@ include_once '../model/tribunalDAO.php';
             
         </tr>
         <tr>
-            <td>Parte Contrária:</td>
+            <td>Parte ContrÃ¡ria:</td>
             <td><input type="text" name="parteContraria" value="" size="20" id="parteContraria" /><br><span id="erroParteContraria"></span></td>
         </tr>
         <tr>
@@ -55,7 +51,7 @@ include_once '../model/tribunalDAO.php';
             <td>Tribunal:</td>
             <td><select name="tribunal">
                     <option>Selecione um Tribunal..</option>
-                    <?php $objTribunalDAO->listaTribunalCombo();?>
+                    <?php $objTribunalDAO->listaTrib1unalCombo();?>
 
                 </select><span id="erroTribunal"></span></td>
         </tr>
@@ -63,7 +59,7 @@ include_once '../model/tribunalDAO.php';
         <tr>
             <td>Forma de Pagamento:</td>
             <td><select name="formaPagamento" size="1" id="formaPagamento">
-                    <option value="vista">À VISTA</option>
+                    <option value="vista">A VISTA</option>
                     <option value="parcelado">PARCELADO</option>
                 </select><span id="erroFormaPagamento"></span></td>
         </tr>
@@ -74,13 +70,13 @@ include_once '../model/tribunalDAO.php';
        
         <tr id="nParcela">
 
-            <td>Número de Parcelas:</td>
+            <td>NÃºmero de Parcelas:</td>
             <td><input type="text" name="nParcelas" value="" size="20" id="nParcelas" /><span id="erroNParcelas"></span></td>
             
         </tr>
 
         <tr>
-            <td>% Valor Ação:</td>
+            <td>% Valor AÃ§Ã£o:</td>
             <td><input type="text" name="valorAcao" value="" size="20" id="valorAcao" /><span id="errovalorAcao"></span></td>
         </tr>
         <tr>

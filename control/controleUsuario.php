@@ -1,5 +1,5 @@
 <?php
-require_once"../model/classUsuario.php";
+require_once "../model/usuarioDAO.php";
 
 $opcao = $_REQUEST["opcao"];
 
@@ -10,29 +10,25 @@ switch ($opcao){
 		$senha = $_POST['senha'];
 		
 		if (isset($_POST['MNadm'])){
-		$menuAdm = $_POST['MNadm'];
-		$objUsuario->setMenuAdm(1);
-                }
-                else {
-		$objUsuario->setMenuAdm(0);
-		
+            $menuAdm = $_POST['MNadm'];
+            $objUsuario->setMenuAdm(1);
+        }else {
+		    $objUsuario->setMenuAdm(0);
 		}
+
 		if (isset($_POST['MNcliente'])){
-		$menuCliente = $_POST['MNcliente'];
-		$objUsuario->setMenuCliente(1);
-		}
+		    $menuCliente = $_POST['MNcliente'];
+		    $objUsuario->setMenuCliente(1);
+		}else{
+            $objUsuario->setMenuCliente(0);
+        }
 
-                else{
-                    $objUsuario->setMenuCliente(0);
-                }
 		if (isset($_POST['MNprocesso'])){
-		$menuProcesso = $_POST['MNprocesso'];
-		$objUsuario->setMenuProcesso(1);
-		}
-
-                else{
-                    $objUsuario->setMenuProcesso(0);
-                }
+            $menuProcesso = $_POST['MNprocesso'];
+            $objUsuario->setMenuProcesso(1);
+		}else{
+            $objUsuario->setMenuProcesso(0);
+        }
 	
 		$objUsuario->setNome($nome);
 		$objUsuario->setLogin($login);
@@ -40,8 +36,10 @@ switch ($opcao){
 		
 		
 		$objUsuarioDAO->cadastrar($objUsuario);
+        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
 		echo"<script>window.location='../view/consultarUsuario.php?pag=adm';</script>";
-		break;
+
+    break;
 	
 	
 	case "lista":
@@ -53,37 +51,31 @@ switch ($opcao){
 	break;
 	
 	case "altera":
-		$id=$_GET['idusuario'];
+		$id=$_POST['idusuario'];
 		$nome=$_POST['nome'];
 		$login = $_POST['login'];
 		$senha = $_POST['senha'];
 		
 		if (isset($_POST['MNadm'])){
-		$menuAdm = $_POST['MNadm'];
-		$objUsuario->setMenuAdm(1);
-		}
-
-                else{
-                   $objUsuario->setMenuAdm(0);
-                }
+            $menuAdm = $_POST['MNadm'];
+            $objUsuario->setMenuAdm(1);
+		}else{
+            $objUsuario->setMenuAdm(0);
+        }
 
 		if (isset($_POST['MNcliente'])){
-		$menuCliente = $_POST['MNcliente'];
-		$objUsuario->setMenuCliente(1);
-		}
-
-                else{
-                    $objUsuario->setMenuCliente(0);
-                }
+            $menuCliente = $_POST['MNcliente'];
+            $objUsuario->setMenuCliente(1);
+		}else{
+            $objUsuario->setMenuCliente(0);
+        }
 
 		if (isset($_POST['MNprocesso'])){
-		$menuProcesso = $_POST['MNprocesso'];
-		$objUsuario->setMenuProcesso(1);
-		}
-
-                else{
-                    $objUsuario->setMenuProcesso(0);
-                }
+            $menuProcesso = $_POST['MNprocesso'];
+            $objUsuario->setMenuProcesso(1);
+		}else{
+            $objUsuario->setMenuProcesso(0);
+        }
 
 		$objUsuario->setId($id);
 		$objUsuario->setNome($nome);
@@ -92,7 +84,8 @@ switch ($opcao){
 		
 		
 		$objUsuarioDAO->alterar($objUsuario);
-		echo"<script>window.location='../view/consultarUsuario.php?pag=adm';</script>";
+        echo"<script> alert('Alteração Realizada com Sucesso');</script>";
+        echo"<script>window.location='../view/consultarUsuario.php?pag=adm';</script>";
 		break;
 
 	case "excluir":

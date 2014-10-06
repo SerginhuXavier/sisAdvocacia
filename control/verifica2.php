@@ -1,28 +1,25 @@
 <?php
-require_once '../model/classUsuario.php';
-/*
 session_start();
-$pag_at =$_GET['pag'];
+
+$pag =$_GET['pag'];
 $menuProcesso = $_SESSION['menuProcesso'];
 $menuAdm = $_SESSION['menuAdm'];
 $menuCliente = $_SESSION['menuCliente'];
 
-if (($menuAdm == "0") && ($pag_at=='adm')) {
-	echo "<script>alert('você não tem permissão para acessar essa página');</script>";
+if (($menuAdm == "0") && ($pag =='adm')) {
+	echo "<script>alert('vocÃª nÃ£o tem permissÃ£o para acessar essa pÃ¡gina');</script>";
 	echo "<script>window.location='bem_vindo.php';</script>";
 }
 
-if (($menuProcesso == "0") && ($pag_at == 'processo')) {
-	echo "<script>alert('você não tem permissão para acessar essa página');</script>";
+if (($menuProcesso == "0") && ($pag == 'processo')) {
+    echo "<script>alert('vocÃª nÃ£o tem permissÃ£o para acessar essa pÃ¡gina');</script>";
 	echo "<script>window.location='bem_vindo.php';</script>";
 }
 
-if (($menuAdm == "0") && (pag=='cliente')) {
-	echo "<script>alert('você não tem permissão para acessar essa página');</script>";
+if (($menuCliente == "0") && ($pag=='cliente')) {
+    echo "<script>alert('vocÃª nÃ£o tem permissÃ£o para acessar essa pÃ¡gina');</script>";
 	echo "<script>window.location='bem_vindo.php';</script>";
 
 
 }
- */
-$objUsuarioDAO->verificalogin();
 ?>

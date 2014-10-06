@@ -10,7 +10,7 @@
 <table border="0" width="100%" class="table_titulo">
     <thead>
         <tr>
-            <th colspan="6">Opções</th>
+            <th colspan="6">OpÃ§Ãµes</th>
             
         </tr>
     </thead>

@@ -15,13 +15,14 @@
     <th colspan='2' align="center">ANDAMENTO DE PROCESSOS</th>
     <th align='right'><a class='exemplo' title='CLIQUE AQUI PARA ADICIONAR UM NOVO REGISTRO' href='../view/cadAndamento.php?'><img src='../public/img/forms.png' alt='CLIQUE AQUI PARA ADICIONAR UM NOVO REGISTRO' border='no'></a></th>
     <tr align='center' class='titulo'>
-        <td>NÚMERO DO PROCESSO</td>
+        <td>NÃšMERO DO PROCESSO</td>
         <td>DATA</td>
-        <td>DESCRIÇÃO</td>
+        <td>DESCRIÃ‡ÃƒO</td>
     </tr>
 <?php
 require_once "../model/processoDAO.php";
-$objProcessoDAO->listaAndamentoProcesso();
+$idProcesso = $_GET['id'];
+$objProcessoDAO->listaAndamentoProcesso($idProcesso);
 ?>
 </body>
 </html>

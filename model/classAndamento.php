@@ -1,7 +1,7 @@
 <?php
-require "constantes.php";
-require "banco.php";
-require "bean/andamento.php";
+require_once "constantes.php";
+require_once "banco.php";
+require_once "bean/andamento.php";
 
 class andamentoDAO extends banco{
 

@@ -5,7 +5,7 @@
 
 
 <?php
-require('../model/classUsuario.php');
+require('../model/usuarioDAO.php');
 $login=$_POST['login'];
 $senha=$_POST['senha'];
 $objUsuario->setLogin($login);

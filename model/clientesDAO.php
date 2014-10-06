@@ -43,7 +43,7 @@ class clientesDAO extends banco {
                     <td>'.$linha['cpf'].'</td>
                     <td>'.$linha['tel1'].'</td>
                     <td>'.$linha['cel'].'</td>
-                    <td><a href="listaProcesso.php?id='.$linha['idCliente'].'"><img src="../public/img/archive_add.png" width="32" height="32" border="0" alt="Processo"/>
+                    <td><a href="listaProcessoAjax.php?id='.$linha['idCliente'].'"><img src="../public/img/archive_add.png" width="32" height="32" border="0" alt="Processo"/>
                     <td><a href="altCliente.php?idCliente='.$linha['idCliente'].'"><img src="../public/img/file_edit.png" width="32" height="32" border="0" alt="Processo"/>
                     <td><a href="javascript:excluirCliente('.$linha['idCliente'].')"><img src="../public/img/file_remove.png" width="32" height="32" border="0" alt="Processo"/>';
         }
@@ -72,7 +72,7 @@ class clientesDAO extends banco {
     public function alterarCliente($objClientes){
         $this->abreConexao();
 
-       echo $sql  = 'UPDATE '.TBL_CLIENTES.'
+        $sql  = 'UPDATE '.TBL_CLIENTES.'
                     SET
                         nome = "'.$objClientes->getNome().'",
                         endereco = "'.$objClientes->getEndereco().'",
@@ -134,7 +134,20 @@ class clientesDAO extends banco {
 
         return $retorno;
     }
+
+    public function listaClienteProcessoCombo(){
+        $this->abreConexao();
+
+        $sql= "SELECT nome, idcliente FROM ".TBL_CLIENTES;
+
+        $banco = mysql_query($sql);
+
+        while($linha=mysql_fetch_array($banco)){
+            echo '<option value="='.$linha["id"].'">'.$linha["nome"].'</option>';
+        }
+
+        $this->fechaConexao();
+    }
 }
 
 $objclientesDAO = new clientesDAO();
-?>

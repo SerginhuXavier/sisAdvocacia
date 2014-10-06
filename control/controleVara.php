@@ -1,5 +1,5 @@
 <?php
-require_once"../model/classVara.php";
+require_once "../model/varaDAO.php";
 
 $opcao = $_REQUEST["opcao"];
 
@@ -10,9 +10,10 @@ switch ($opcao){
 		
 		$objVara->setDescricao($descricao);
 		$objVara->setTribunal($tribunal);
-		
-		
+
 		$objVaraDAO->cadastrar($objVara);
+
+        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
 		echo"<script>window.location='../view/consultarVara.php?pag=processo';</script>";
 		break;
 	
@@ -21,8 +22,8 @@ switch ($opcao){
 		$id=$_GET['idvara'];
 		$objVara->setId($_GET['idvara']);
 		$objVaraDAO->consultar1($objVara);
-		echo "
-		<script>window.location='../view/altVara.php?id=".$id."';</script>";
+
+		echo "<script>window.location='../view/altVara.php?id=".$id."';</script>";
 	break;
 	
 	case "altera":
@@ -35,15 +36,19 @@ switch ($opcao){
 		$objVara->setTribunal($tribunal);
 		
 		$objVaraDAO->alterar($objVara);
+
+        echo"<script> alert('Alteração Realizada com Sucesso');</script>";
 		echo"<script>window.location='../view/consultarVara.php?pag=processo';</script>";
 		break;
 
 	case "excluir":
 		$id=$_POST['id'];
-		$objVara->setId($id); 
+
+		$objVara->setId($id);
+
 		$objVaraDAO->inativar($objVara);
-			echo "
-			<script> window.location='../view/consultarVara.php?pag=processo';</script>";
+
+		echo "<script> window.location='../view/consultarVara.php?pag=processo';</script>";
 	break;
 }
 ?>

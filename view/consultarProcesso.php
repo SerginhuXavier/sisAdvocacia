@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script	src="../public/js/ext.js" type="text/javascript"></script>
-<script type="text/javascript" src="../public/js/lista_processo.js"></script>
+<script type="text/javascript" src="../public/js/processo.js"></script>
 <script src="public/js/jquery.1.2.6"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Relatório de Processos</title>
