@@ -1,7 +1,7 @@
 <link rel="styleSheet" type="text/css" href="../public/css/estilo.css">
 <script type="text/javascript" src="../public/js/jquery.js"></script>
 <script type="text/javascript" src="../public/js/cliente.js"></script>
-<script type="text/javascript" src="../public/js/jquery.maskedinput-1.2.2.js"></script>
+<script type="text/javascript" src="../public/js/jquery.maskedinput.js"></script>
 
 <form name="frmCliente" action="../control/controleCliente.php" id="frmCliente" method="POST">
 

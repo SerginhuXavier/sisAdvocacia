@@ -14,8 +14,11 @@ switch ($opcao){
 		
 		$objComarcaDAO->cadastrar($objComarca);
 
-        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
-		echo"<script>window.location='../view/consultarComarca.php?pag=processo';</script>";
+        echo "
+            <script>
+                alert('Cadastro Realizado com Sucesso');
+                window.location='../view/consultarComarca.php?pag=processo';
+            </script>";
 		break;
 	
 	
@@ -40,8 +43,11 @@ switch ($opcao){
 		
 		$objComarcaDAO->alterar($objComarca);
 
-        echo"<script> alert('Alteração Realizada com Sucesso');</script>";
-        echo"<script>window.location='../view/consultarComarca.php?pag=processo';</script>";
+        echo"
+            <script>
+                alert('Alteração Realizada com Sucesso');
+                window.location='../view/consultarComarca.php?pag=processo';
+            </script>";
 
 		break;
 

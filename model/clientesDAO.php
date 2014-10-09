@@ -135,15 +135,22 @@ class clientesDAO extends banco {
         return $retorno;
     }
 
-    public function listaClienteProcessoCombo(){
+    public function listaClienteProcessoCombo($id=0){
         $this->abreConexao();
 
-        $sql= "SELECT nome, idcliente FROM ".TBL_CLIENTES;
+        $sql= "
+                SELECT nome, idCliente FROM ".TBL_CLIENTES."
+              ";
 
         $banco = mysql_query($sql);
 
         while($linha=mysql_fetch_array($banco)){
-            echo '<option value="='.$linha["id"].'">'.$linha["nome"].'</option>';
+            if($id != '0' && $id == $linha['idCliente']){
+                $selected = 'selected';
+            }else{
+                $selected = '';
+            }
+            echo '<option value="'.$linha["idCliente"].'" '.$selected.'>'.$linha["nome"].'</option>';
         }
 
         $this->fechaConexao();

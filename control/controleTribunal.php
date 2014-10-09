@@ -10,8 +10,11 @@ switch($opcao) {
 
         $objTribunalDAO->incluirTribunal($objTribunal);
 
-        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
-        echo "<script>window.location='../view/consultarTribunal.php';</script>";
+        echo "
+            <script>
+                alert('Cadastro Realizado com Sucesso');
+                window.location='../view/consultarTribunal.php';
+            </script>";
     break;
 
     case "alterar":
@@ -20,8 +23,11 @@ switch($opcao) {
 
         $objTribunalDAO->alterar($objTribunal);
 
-        echo "<script>alert('Alteração Realizada com Sucesso');</script>";
-        echo "<script>window.location='../view/consultarTribunal.php';</script>";
+        echo "
+            <script>
+                alert('Alteração Realizada com Sucesso');
+                window.location='../view/consultarTribunal.php';
+            </script>";
     break;
 
 

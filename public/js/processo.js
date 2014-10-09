@@ -23,10 +23,8 @@ function excluir (id){
 
 
 $(document).ready(function(){
-    $("input[@name=data]").mask('99/99/9999');
+    $("#data").mask('99/99/9999');
 
-
-    alert(document);
     $("#nParcela").hide();
     $("#processo").hide();
     $("#carregando").hide();
@@ -46,15 +44,6 @@ $(document).ready(function(){
     $("#idCliente").change(function () {
         var cliente = $("#idCliente").val();
 
-        $("#carregando").ajaxStart(function(){
-            $("#processo").hide();
-            $("#carregando").show();
-        });
-
-        $("#carregando").ajaxStop(function() {
-            $("#carregando").hide();
-        });
-
         $.post('listaClienteAjax.php' ,{id:cliente},
         function (data){
 
@@ -65,6 +54,8 @@ $(document).ready(function(){
             }
             else {
                 $("#processo").empty();
+                $("#carregando").hide();
+                $("#processo").hide();
             }
         });
     });
@@ -79,32 +70,33 @@ $(document).ready(function(){
         var valorFixo = $("#valorFixo").val();
         var nParcelas = $("#nParcelas").val();
         var valorAcao = $("#valorAcao").val();
+        var data = $("#data").val();
 
         //fazendo a verificação dos campos vazios.
+        $(".span").html('');
         if (nProcesso == "") {
-            $("#erroProcesso").html("Campo N�mero do Processo Vazio.");
+            $("#erroProcesso").html("Campo Número do Processo Vazio.");
             $("#nProcesso").focus();
         } else if (idCliente == ""){
-                $("#erroCliente").html("Campo Cliente Vazio.");
-                $("#idCliente").focus();
+            $("#erroCliente").html("Campo Cliente Vazio.");
+            $("#idCliente").focus();
         } else if (parteContraria == "" ) {
-                $("#erroParteContraria").html("Campo Parte Contr�ria Vazio.");
-                $("#parteContraria").focus();
-        } else if (tribunal == ""){
-                $("#erroTribunal").html("Campo Tribunal Vazio.");
-                $("#tribunal").focus();
+            $("#erroParteContraria").html("Campo Parte Contrária Vazio.");
+            $("#parteContraria").focus();
+        } else if(data == '') {
+            $("#erroData").html("Campo Data Vazio.");
+            $("#data").focus();
+        }else if (tribunal == ""){
+            $("#erroTribunal").html("Campo Tribunal Vazio.");
+            $("#tribunal").focus();
         } else if (formaPagamento == ""){
-                $("#erroFormaPagamento").html("Campo Forma de Pagamento Vazio.");
-                $("#formaPagamento").focus();
-        } else if (valorFixo == ""){
-                $("#erroValorFixo").html("Campo Valor Fixo Vazio.");
-                $("#valorFixo").focus();
-        } else if ((formaPagamento == "PARCELADO") && (nParcelas == "")) {
-                 $("#erroNParcelas").html("Campo N�mero de Parcelas Vazio.");
-                 $("#nParcelas").focus();
-        } else if (valorAcao == ""){
-                  $("#errovalorAcao").html("Campo Valor A��o Vazio.");
-                  $("#valorAcao").focus();
+            $("#erroFormaPagamento").html("Campo Forma de Pagamento Vazio.");
+            $("#formaPagamento").focus();
+        } else if (valorFixo == "" && valorAcao == '') {
+            $("#erroFormaPagamento").html("Campo Valor Fixo ou o campao % Valor Ação devem ser preenchidos.");
+        } else if ((formaPagamento == "parcelado") && (nParcelas == "")) {
+            $("#erroFormaPagamento").html("Campo Número de Parcelas Vazio.");
+            $("#nParcelas").focus();
         } else {
            document.getElementById("frmProcesso").submit();
         }

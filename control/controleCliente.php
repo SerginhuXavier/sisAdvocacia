@@ -25,8 +25,11 @@ switch ($opcao) {
 
         $objclientesDAO->incluirCliente($objClientes);
 
-        echo "<script>alert('Cadastro Realizado com Sucesso.');</script>";
-        echo "<script>window.location='../view/consultarCliente.php?pag=cliente';</script>";
+        echo "
+                <script>
+                    alert('Cadastro Realizado com Sucesso.');
+                    window.location='../view/consultarCliente.php?pag=cliente';
+                </script>";
 
     break;
 
@@ -49,8 +52,11 @@ switch ($opcao) {
 
         echo $objclientesDAO->alterarCliente($objClientes);
 
-        echo "<script>alert('Alteraçã Realizada com Sucesso.');</script>";
-        echo "<script>window.location = '../view/consultarCliente.php?pag=cliente';</script>";
+        echo "
+            <script>
+                alert('Alteraçã Realizada com Sucesso.');
+                window.location = '../view/consultarCliente.php?pag=cliente';
+            </script>";
     break;
 
     case "excluir":

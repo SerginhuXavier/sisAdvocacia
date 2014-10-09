@@ -13,8 +13,11 @@ switch ($opcao){
 
 		$objVaraDAO->cadastrar($objVara);
 
-        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
-		echo"<script>window.location='../view/consultarVara.php?pag=processo';</script>";
+        echo "
+            <script>
+                alert('Cadastro Realizado com Sucesso');
+                window.location='../view/consultarVara.php?pag=processo';
+            </script>";
 		break;
 	
 	
@@ -37,8 +40,11 @@ switch ($opcao){
 		
 		$objVaraDAO->alterar($objVara);
 
-        echo"<script> alert('Alteração Realizada com Sucesso');</script>";
-		echo"<script>window.location='../view/consultarVara.php?pag=processo';</script>";
+        echo"
+            <script>
+                alert('Alteração Realizada com Sucesso');
+                window.location='../view/consultarVara.php?pag=processo';
+            </script>";
 		break;
 
 	case "excluir":

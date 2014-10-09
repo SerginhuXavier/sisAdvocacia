@@ -9,88 +9,77 @@ class processoDAO extends banco {
     public function incluirProcesso($objProcesso){
 
         $this->abreConexao();
-		//fazendo o tratamento de data
-		$data= $objProcesso->getData();
-		$data1=explode("/",$data);
-		$dataFinal=$data1[2]."-".$data1[1]."-".$data1[0];
-		//fim do tratamento de data
-		
-        if ($objProcesso->getNumeroParcelas() != "") {
-             $nParcelas = 'nParcelas = "'.$objProcesso->getNumeroParcelas().'",';
-        }
-        else {
-            $nParcelas = '';
-        }
-         $sql = 'INSERT INTO '.TBL_PROCESSOS.'
+
+       echo  $sql = 'INSERT INTO '.TBL_PROCESSOS.'
                 SET  nprocesso = "'.$objProcesso->getNProcesso().'",
-                     idCliente = "'.$objProcesso->getCliente().'",
+                     idCliente = '.$objProcesso->getCliente().',
                      parte_contraria = "'.$objProcesso->getParte().'",
-                     idTribunal = "'.$objProcesso->getTribunal().'",
-                     data = "'.$dataFinal.'",
+                     idTribunal = '.$objProcesso->getTribunal().',
+                     data = "'.$objProcesso->getData().'",
 					 formaPagamento = "'.$objProcesso->getFormaPagamento().'",
-                     valorFixo = "'.$objProcesso->getValorFixo().'",
-                     '.$nParcelas.'
+                     valorFixo = '.$objProcesso->getValorFixo().',
+                     nParcelas = '.$objProcesso->getNumeroParcelas().',
                      valorAcao = "'.$objProcesso->getValorAcao().'"';
 
       
          mysql_query($sql);
 
-        echo "<script>alert('Cadastro Realizado com Sucesso.');</script>";
-		echo "<script>window.location('../view/consultarProcesso.php?pag=processo');</script>";
          $this->fechaConexao();
 	}
 
 	public function listaProcesso() {
 		$this->abreConexao();
 		
-			$lista="SELECT *, DATE_FORMAT(
-					data , '%d/%m/20%y' ) AS
-					DATACERTA from".TBL_PROCESSOS."
-					where status=1";
-			$resultado=mysql_query($lista);
+			$lista="SELECT p.*, DATE_FORMAT(
+					data , '%d/%m/%y' ) AS
+					DATACERTA, c.nome, t.descricao
+					FROM ".TBL_PROCESSOS." p
+					    JOIN ".TBL_CLIENTES." c ON
+					    p.idCliente = c.idCliente
+					    JOIN ".TBL_TRIBUNAIS." t ON
+					    p.idTribunal = t.idTribunal
+					WHERE p.status='A'";
+
+			$resultado=mysql_query($lista) or die(mysql_error());
+
 			while($linha=mysql_fetch_array($resultado)) {
-			
-				$procura="SELECT c.nome, t.descricao
-						  FROM ".TBL_CLIENTES." c, ".TBL_TRIBUNAIS." t, ".TBL_PROCESSOS." p
-						  WHERE c.idCliente = p.idCliente AND
-						  t.idTribunal = p
-						  .idTribunal AND
-						  p.idProcesso=".$linha['idProcesso'];
-				$resultado2=mysql_query($procura);
-				$linha2=mysql_fetch_array($resultado2);
-		
 				echo "
-					<tr class='texto' align='center' id=".$linha['idProcesso'].">
-					<tr class='texto' align='center' border='1'>
-					<td>".$linha['idProcesso']."</td>
+					<tr class='texto' align='center' id='".$linha['idProcesso']."'>
 					<td>".$linha['nprocesso']."</td>
-					<td>".$linha2['nome']."</td>
+					<td>".$linha['nome']."</td>
 					<td>".$linha['parte_contraria']."</td>
-					<td>".$linha2['descricao']."</td>
+					<td>".$linha['descricao']."</td>
 					<td>".$linha['DATACERTA']."</td>
-					<td>".$linha['status']."</td>
-					<td><a href='../view/consultarAndamento.php?id=".$linha['idProcesso']."'>ver andamento</a></td>
+					<td>
+					    <a href='../view/consultarAndamento.php?id=".$linha['idProcesso']."'>
+					        <img src='../public/img/archive_add.png' alt='ver andamento' border='no' />
+					    </a>
+                    </td>
 					<td><a id='altera' href=altProcesso.php?idprocesso=".$linha['idProcesso']."><img src='../public/img/file_edit.png' border='no'></a></td>
 					<td><a href=javascript:excluir(".$linha['idProcesso'].")><img src='../public/img/file_remove.png' border='no'></a></td>
+					</tr>
 				";
 			}
-				echo"</tr></table>";
-	
-			return $linha;
-		
-		
+
 		$this->fechaConexao();
 	}
 
 	public function consultarProcesso($objProcesso){
 		$this->abreConexao();
-			$consulta="SELECT c.nome, t.descricao, p.idProcesso, p.nprocesso, p.valorFixo, p.valorAcao, p.parte_contraria, p.status, p.nParcelas,DATE_FORMAT(
-					data , '%d/%m/20%y' ) as datacerta
-			FROM ".TBL_PROCESSOS." p, ".TBL_TRIBUNAIS." t, ".TBL_CLIENTES." c
-			WHERE p.idCliente = c.idCliente
-			AND p.idTribunal = t.idTribunal
-			AND p.idProcesso =".$objProcesso->getId();
+			$consulta="
+                      SELECT
+                      c.nome, c.idCliente,
+                      t.descricao, t.idTribunal,
+                      p.idProcesso, p.nprocesso, p.formaPagamento, p.valorFixo, p.valorAcao, p.parte_contraria, p.status, p.nParcelas,DATE_FORMAT(data , '%d/%m/20%y' ) as datacerta
+			            FROM ".TBL_PROCESSOS." p
+			            JOIN ".TBL_TRIBUNAIS." t ON
+			             t.idTribunal = p.idTribunal
+                        JOIN ".TBL_CLIENTES." c ON
+                        t.idTribunal = c.idCliente
+			            WHERE p.idProcesso =".$objProcesso->getId();
+
 			$resultado=mysql_query($consulta);
+
 			$linha=mysql_fetch_array($resultado);
 			return $linha;
 		$this->fechaConexao();
@@ -98,32 +87,21 @@ class processoDAO extends banco {
 	
 	public function editarProcesso($objProcesso){
 		$this->abreConexao();
-		//fazendo o tratamento de data
-		$data= $objProcesso->getData();
-		$data1=explode("/",$data);
-		$dataFinal=$data1[2]."-".$data1[1]."-".$data1[0];
-		//fim do tratamento de data
-		if ($objProcesso->getNumeroParcelas() != "") {
-             $nParcelas = 'nParcelas = "'.$objProcesso->getNumeroParcelas().'",';
-        }
-        else {
-            $nParcelas = '';
-        }
-		
+
+
 		$edita='update '.TBL_PROCESSOS.' set
 					nprocesso = "'.$objProcesso->getNProcesso().'",
                      idCliente = "'.$objProcesso->getCliente().'",
                      parte_contraria = "'.$objProcesso->getParte().'",
                      idTribunal = "'.$objProcesso->getTribunal().'",
-                     data = "'.$dataFinal.'",
+                     data = "'.$objProcesso->getData().'",
 					 formaPagamento = "'.$objProcesso->getFormaPagamento().'",
                      valorFixo = "'.$objProcesso->getValorFixo().'",
-                     '.$nParcelas.'
+                     nParcelas = '.$objProcesso->getNumeroParcelas().',
                      valorAcao = "'.$objProcesso->getValorAcao().'"
 					where idProcesso="'.$objProcesso->getId().'
 		"';
-		echo "<script>alert('Cadastro Alterado com Sucesso.');</script>";
-		echo "<script>window.location('../view/consultarProcesso.php?pag=processo');</script>";
+
 		$this->fechaConexao();
 	}
 	
@@ -131,7 +109,7 @@ class processoDAO extends banco {
 		$this->abreConexao();
 			$sql="update".TBL_PROCESSOS."
 			set
-			statusRegistro=0
+			status=0
 			where idProcesso=".$objProcesso->getId();
 			mysql_query($sql);
 		$this->fechaConexao();
@@ -139,9 +117,10 @@ class processoDAO extends banco {
 
        public function listaAndamentoProcesso($idProcesso){
            $this->abreConexao();
-                echo $sql="SELECT *
-                                from ".TBL_ANDAMENTOS."
-                                                        where idProcesso=".$idProcesso;
+                $sql="
+                      SELECT *
+                        FROM ".TBL_ANDAMENTOS."
+                            WHERE idProcesso=".$idProcesso;
                 $resultado=mysql_query($sql);
 
                 while($linha=mysql_fetch_array($resultado)){
@@ -156,5 +135,3 @@ class processoDAO extends banco {
        }
 }
 $objProcessoDAO = new processoDAO();
-
-?>

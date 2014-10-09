@@ -41,7 +41,7 @@ class tribunalDAO extends banco {
         }
     }
 
-     public function listaTribunalCombo ($id = 0){
+     public function listaTribunalCombo($id = 0){
         $this->abreConexao();
 
         $sql = 'SELECT * FROM '.TBL_TRIBUNAIS." where status=1";
@@ -62,59 +62,52 @@ class tribunalDAO extends banco {
 	}
 
 
-       public function consultar($objTribunal) {
+   public function consultar($objTribunal) {
 
-           $this->abreConexao();
+       $this->abreConexao();
 
-            $sql = 'SELECT * FROM '.TBL_TRIBUNAIS.' WHERE idTribunal = "'.$objTribunal->getId().'"';
+        $sql = 'SELECT * FROM '.TBL_TRIBUNAIS.' WHERE idTribunal = "'.$objTribunal->getId().'"';
 
-           $resultado = mysql_query($sql) or die ('N�o foi poss�vel consutar esse registro.'.mysql_error());
+       $resultado = mysql_query($sql) or die ('N�o foi poss�vel consutar esse registro.'.mysql_error());
 
-           $linha = mysql_fetch_assoc($resultado);
+       $linha = mysql_fetch_assoc($resultado);
 
-           return $linha;
-
-
-
-       }
-
-       public function alterar($objTribunal){
-
-           $this->abreConexao();
-
-           $sql = 'UPDATE
-                        '.TBL_TRIBUNAIS.'
-                    SET
-                         descricao  = "'.$objTribunal->getDescricao().'"
-                    WHERE
-                        idTribunal = "'.$objTribunal->getId().'"';
-
-            mysql_query($sql) or die ('N�o foi poss�vel atualizar o registro.');
+       return $linha;
 
 
 
+   }
 
+   public function alterar($objTribunal){
 
-       }
+       $this->abreConexao();
 
-       public function excluir($objTribunal){
+       $sql = 'UPDATE
+                    '.TBL_TRIBUNAIS.'
+                SET
+                     descricao  = "'.$objTribunal->getDescricao().'"
+                WHERE
+                    idTribunal = "'.$objTribunal->getId().'"';
 
-
-           $this->abreConexao();
-
-           $sql = "DELETE FROM  ".TBL_TRIBUNAIS." WHERE idTribunal = '".$objTribunal->getId()."'";
-
-           mysql_query($sql) or die ('N�o foi poss�vel fazer a exclus�o. '.mysql_error());
-
-           
-       }
+        mysql_query($sql) or die ('N�o foi poss�vel atualizar o registro.');
 
 
 
 
 
+   }
+
+   public function excluir($objTribunal){
 
 
+       $this->abreConexao();
+
+       $sql = "DELETE FROM  ".TBL_TRIBUNAIS." WHERE idTribunal = '".$objTribunal->getId()."'";
+
+       mysql_query($sql) or die ('N�o foi poss�vel fazer a exclus�o. '.mysql_error());
+
+
+   }
 }
 $objTribunalDAO = new tribunalDAO();
 

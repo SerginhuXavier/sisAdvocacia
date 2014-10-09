@@ -36,8 +36,11 @@ switch ($opcao){
 		
 		
 		$objUsuarioDAO->cadastrar($objUsuario);
-        echo "<script>alert('Cadastro Realizado com Sucesso');</script>";
-		echo"<script>window.location='../view/consultarUsuario.php?pag=adm';</script>";
+        echo "
+            <script>
+                alert('Cadastro Realizado com Sucesso');
+                window.location='../view/consultarUsuario.php?pag=adm';
+            </script>";
 
     break;
 	
@@ -84,8 +87,11 @@ switch ($opcao){
 		
 		
 		$objUsuarioDAO->alterar($objUsuario);
-        echo"<script> alert('Alteração Realizada com Sucesso');</script>";
-        echo"<script>window.location='../view/consultarUsuario.php?pag=adm';</script>";
+        echo"
+            <script>
+                alert('Alteração Realizada com Sucesso');
+                window.location='../view/consultarUsuario.php?pag=adm';
+            </script>";
 		break;
 
 	case "excluir":

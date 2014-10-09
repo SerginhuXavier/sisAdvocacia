@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Out-2014 às 22:22
+-- Generation Time: 09-Out-2014 às 06:21
 -- Versão do servidor: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -31,10 +31,10 @@ USE `advocacia`;
 DROP TABLE IF EXISTS `andamento`;
 CREATE TABLE IF NOT EXISTS `andamento` (
 `idAndamento` int(11) NOT NULL,
-  `data` datetime NOT NULL,
+  `data` date NOT NULL,
   `idProcesso` int(11) NOT NULL,
   `observacao` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -60,14 +60,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `datacadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` int(11) NOT NULL DEFAULT '1',
   `nacionalidade` varchar(40) DEFAULT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Extraindo dados da tabela `clientes`
---
-
-INSERT INTO `clientes` (`idCliente`, `nome`, `estado_civil`, `profissao`, `rg`, `cpf`, `endereco`, `complemento`, `tel1`, `tel2`, `cel`, `email`, `observacao`, `datacadastro`, `status`, `nacionalidade`) VALUES
-(1, 'Paulo Sergio Junior', 'casado', 'Programador', '1111111', '111.111.111-11', 'rua carneiro da cunha', '35, apto 103', '(11)11111-1111', '(11)11111-1111', '(11)11111-1111', 'test', 'teste', '2014-10-04 03:09:11', 1, 'BrasileirÃ£o');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -81,19 +74,7 @@ CREATE TABLE IF NOT EXISTS `comarca` (
   `descricao` varchar(30) CHARACTER SET latin1 NOT NULL,
   `idVara` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- Extraindo dados da tabela `comarca`
---
-
-INSERT INTO `comarca` (`idComarca`, `descricao`, `idVara`, `status`) VALUES
-(1, 'comarca do Rio de Janeiro', 3, 1),
-(2, 'dasda', 0, 1),
-(3, 'asaDSAD', 0, 1),
-(4, 'DASDAS', 2, 0),
-(5, 'DAdasd', 2, 0),
-(6, 'DASDASDdasda', 2, 0);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -105,7 +86,7 @@ DROP TABLE IF EXISTS `nivel`;
 CREATE TABLE IF NOT EXISTS `nivel` (
 `idNivel` int(11) NOT NULL,
   `descricao` varchar(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -120,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `permissao` (
   `menuProcesso` varchar(1) CHARACTER SET latin1 NOT NULL,
   `menuAdm` varchar(1) CHARACTER SET latin1 NOT NULL,
   `idNivel` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -141,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `processo` (
   `nParcelas` int(20) NOT NULL,
   `valorAcao` decimal(10,2) DEFAULT NULL,
   `status` varchar(1) CHARACTER SET latin1 DEFAULT 'A'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -154,14 +135,7 @@ CREATE TABLE IF NOT EXISTS `tribunal` (
 `idTribunal` int(11) NOT NULL,
   `descricao` varchar(30) CHARACTER SET latin1 NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Extraindo dados da tabela `tribunal`
---
-
-INSERT INTO `tribunal` (`idTribunal`, `descricao`, `status`) VALUES
-(1, 'Tribunal de JustiÃ§a', 1);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -179,17 +153,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `menuProcesso` int(11) NOT NULL,
   `menuCliente` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`idUsuario`, `nome`, `login`, `senha`, `menuAdm`, `menuProcesso`, `menuCliente`, `status`) VALUES
-(1, 'Master', 'master', 'master', 1, 1, 1, 1),
-(2, 'Clientes', 'cliente', 'cliente', 0, 0, 1, 1),
-(3, 'adm', 'adm', 'adm', 1, 0, 0, 1),
-(4, 'processo', 'processo', 'processo', 0, 1, 0, 1);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -203,15 +167,7 @@ CREATE TABLE IF NOT EXISTS `vara` (
   `descricao` varchar(30) CHARACTER SET latin1 NOT NULL,
   `idTribunal` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Extraindo dados da tabela `vara`
---
-
-INSERT INTO `vara` (`idVara`, `descricao`, `idTribunal`, `status`) VALUES
-(2, 'Vara de FamÃ­lia', 0, 1),
-(3, 'asda', 1, 1);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -279,7 +235,7 @@ ALTER TABLE `vara`
 -- AUTO_INCREMENT for table `andamento`
 --
 ALTER TABLE `andamento`
-MODIFY `idAndamento` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idAndamento` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `clientes`
 --
@@ -304,7 +260,7 @@ MODIFY `idPermissao` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `processo`
 --
 ALTER TABLE `processo`
-MODIFY `idProcesso` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idProcesso` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tribunal`
 --
@@ -323,3 +279,14 @@ MODIFY `idVara` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nome`, `login`, `senha`, `menuAdm`, `menuProcesso`, `menuCliente`, `status`) VALUES
+(1, 'Master', 'master', 'master', 1, 1, 1, 1),
+(2, 'Clientes', 'cliente', 'cliente', 0, 0, 1, 1),
+(3, 'adm', 'adm', 'adm', 1, 0, 0, 1),
+(4, 'processo', 'processo', 'processo', 0, 1, 0, 1);
