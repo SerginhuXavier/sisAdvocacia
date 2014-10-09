@@ -1,5 +1,5 @@
 # Configuracao de projeto da IDE
-.idea
+.idea/*
 nbproject/project.*
 nbproject/private/private.*
 
