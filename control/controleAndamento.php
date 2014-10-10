@@ -1,27 +1,27 @@
 <?php
-require_once"../model/classAndamento.php";
+require_once "../model/andamentoDAO.php";
 
 $opcao = $_REQUEST["opcao"];
 
 switch ($opcao){
 	case "cadastrar" : 
-		$processo= $_GET['processo'];
+		$processo= $_POST   ['processo'];
 		$descricao=$_POST['descricao'];
-		$data = $_POST['data'];
-				
-				
+		$data = implode('-',array_reverse(explode('/',$_POST['data'])));
+
 		$objAndamento->setProcesso($processo);
 		$objAndamento->setDescricao($descricao);
 		$objAndamento->setdata($data);
 					
 		$objAndamentoDAO->cadastrar($objAndamento);
+
 		echo"<script>window.location='../view/consultarAndamento.php?pag=cliente';</script>";
 		break;
 	
 	case "altera":
 		$id=$_GET['idandamento'];
 		$descricao=$_POST['descricao'];
-		$data = $_POST['data'];
+        $data = implode('-',array_reverse(explode('/',$_POST['data'])));
 				
 		$objAndamento->setId($id);
 		$objAndamento->setDescricao($descricao);
